@@ -316,7 +316,7 @@ def inicializar_banco():
 ('RAIANNY MICAELE CRUZ DO NASCIMENTO', 9),
 ('DEYUSON TSAWETE TSIROWA', 9),
 ('GUSTAVO KASSIO SOUSA', 9),
-('JOSE AUGUSTO DO NASCIMENTO PACIENCIA', 9);        ]
+('JOSE AUGUSTO DO NASCIMENTO PACIENCIA', 9)       ]
         CURSOR.executemany("INSERT INTO alunos (nome, turma_id) VALUES (?, ?);", alunos_iniciais)
         CONN.commit()
 
