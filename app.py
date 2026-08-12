@@ -49,7 +49,7 @@ def inicializar_banco():
         CURSOR.executemany("INSERT INTO turmas (id, nome) VALUES (?, ?);", turmas_iniciais)
         
         alunos_iniciais = [
--- Turma: 1ª A
+#-- Turma: 1ª A
 ('ANTONIA SÂMARA DOS SANTOS SOUSA LIMA', 1),
 ('EMILLY NUNES DIAS', 1),
 ('FELYPE RODEN DE FRANÇA SANTOS', 1),
@@ -77,7 +77,7 @@ def inicializar_banco():
 ('ENZO DA SILVA BRAGA MARTINS', 1),
 ('MARIA EDUARDA SOUSA DA SILVA', 1),
 
--- Turma: 1º Técnico (Mineração)
+#-- Turma: 1º Técnico (Mineração)
 ('ADÃO LUIZ MENDONÇA GONÇALVES', 2),
 ('AIRTON SILVA DE ARAUJO LUCAS', 2),
 ('ARTHUR SILVA PEDROSA', 2),
@@ -105,7 +105,7 @@ def inicializar_banco():
 ('VICTOR HUGO SILVA MORAIS', 2),
 ('ANTONELLA RODRIGUES DE OLIVEIRA PRADO', 2),
 
--- Turma: 2ª A
+#-- Turma: 2ª A
 ('ANA BEATRIZ MARIANO DA SILVA', 3),
 ('BRUNO RIBEIRO DOS SANTOS', 3),
 ('EVELLYN NATTÁLYA DE JESUS DA SILVA', 3),
@@ -119,7 +119,7 @@ def inicializar_banco():
 ('VITÓRIA DA SILVA ROSA BORGES LEAL', 3),
 ('GABRIELLA APARECIDA MEDEIROS PIMENTA SILVA', 3),
 
--- Turma: 2º Técnico (Dev. Sistemas)
+#-- Turma: 2º Técnico (Dev. Sistemas)
 ('ANA CLARA OLIVEIRA FERNANDES', 4),
 ('ANDRÉ FELIPE DA SILVA', 4),
 ('EDUARDA SILVA RIBEIRO', 4),
@@ -144,7 +144,7 @@ def inicializar_banco():
 ('VICTOR HUGO DE ARAÚJO SANTOS', 4),
 ('VITOR VENTURA DA SILVA', 4),
 
--- Turma: 3ª A
+#-- Turma: 3ª A
 ('ALINE BARBOSA DA SILVA', 5),
 ('ANA CLARA DE JESUS BRITO', 5),
 ('ANA CLARA VIEIRA DIAS', 5),
@@ -174,7 +174,7 @@ def inicializar_banco():
 ('VIVIANE ABADIA ALVES DUARTE', 5),
 ('INGRID DAYANE PASCOAL DE OLIVEIRA', 5),
 
--- Turma: 6º Ano
+#-- Turma: 6º Ano
 ('AGATA EMANUELLY FLEURY ABADIA PEREIRA', 6),
 ('ALICE GABRIELLE DA SILVA SABINO', 6),
 ('AMANDA GABRIELY DA SILVA CARDOSO', 6),
@@ -211,7 +211,7 @@ def inicializar_banco():
 ('VIVIANY LIMEIRA DE ANDRADE', 6),
 ('AMANDA VITORYA SANTOS LIMA', 6),
 
--- Turma: 7º Ano
+#-- Turma: 7º Ano
 ('AGATHA DA SILVA ANDRADE', 7),
 ('ALICE CAROLINA FERREIRA DA SILVA', 7),
 ('ANA BEATRIZ PEREIRA ARRUDA', 7),
@@ -248,7 +248,7 @@ def inicializar_banco():
 ('MARIA VITÓRIA VIEIRA REZENDE', 7),
 ('DARLLON MIKAEL RIBEIRO COSTA', 7),
 
--- Turma: 8º Ano
+#-- Turma: 8º Ano
 ('ADILSON MARQUES DE OLIVEIRA', 8),
 ('ANA JÚLIA REINALDO RODRIGUES', 8),
 ('ARTHUR MARCELINO BRAZ', 8),
@@ -284,7 +284,7 @@ def inicializar_banco():
 ('EMANUELLY VIEIRA MONTEIRO', 8),
 ('DHEYMIS RAMOS MARTINS', 8),
 
--- Turma: 9º Ano
+#-- Turma: 9º Ano
 ('ALICE FURTADO DOS SANTOS JORGE', 9),
 ('ALICE GOMES ROSA', 9),
 ('ANNA LUIZA DA SILVA', 9),
