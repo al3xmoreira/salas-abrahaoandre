@@ -349,35 +349,50 @@ if menu == "🎲 Gerar Ensalamento":
             if st.button("🔀 Sortear e Misturar Alunos", type="primary"):
                 ids_turmas = turmas_df[turmas_df["nome"].isin(turmas_selecionadas)]["id"].tolist()
                 
-                turmas_com_alunos = {}
+                salas = [[] for _ in range(num_salas)]
                 total_alunos = 0
+                
+                # 1. DISTRIBUIÇÃO ESTRATIFICADA: Divide CADA turma igualmente entre as salas
                 for t_id in ids_turmas:
                     nome_t = turmas_df[turmas_df["id"] == t_id]["nome"].values[0]
                     alunos = pd.read_sql_query("SELECT nome FROM alunos WHERE turma_id = ?", CONN, params=(t_id,))["nome"].tolist()
-                    random.shuffle(alunos)
-                    turmas_com_alunos[nome_t] = alunos
-                    total_alunos += len(alunos)
+                    
+                    if alunos:
+                        random.shuffle(alunos)  # Embaralha os alunos da turma
+                        total_alunos += len(alunos)
+                        
+                        # Sorteia qual sala começa a receber para não sobrecarregar a Sala 1 com restos de divisão
+                        offset_sala = random.randint(0, num_salas - 1)
+                        
+                        for idx, aluno in enumerate(alunos):
+                            sala_destinada = (idx + offset_sala) % num_salas
+                            salas[sala_destinada].append({
+                                "Nome do Aluno": aluno,
+                                "Turma de Origem": nome_t
+                            })
                 
                 if total_alunos == 0:
                     st.error("Não há alunos cadastrados nas turmas selecionadas.")
                 else:
-                    # Intercalação Round-Robin
-                    alunos_intercalados = []
-                    while any(turmas_com_alunos.values()):
-                        for t_nome in list(turmas_com_alunos.keys()):
-                            if turmas_com_alunos[t_nome]:
-                                alunos_intercalados.append({
-                                    "Nome do Aluno": turmas_com_alunos[t_nome].pop(0),
-                                    "Turma de Origem": t_nome
-                                })
-                    
-                    # Distribuição equilibrada nas salas
-                    salas = [[] for _ in range(num_salas)]
-                    for idx, aluno in enumerate(alunos_intercalados):
-                        sala_destinada = idx % num_salas
-                        salas[sala_destinada].append(aluno)
-                    
-                    st.success(f"Distribuição concluída com sucesso! Total de {total_alunos} alunos divididos em {num_salas} salas.")
+                    # 2. INTERCALAÇÃO DE CARTEIRAS: Alterna as turmas dentro de cada sala
+                    for i in range(num_salas):
+                        por_turma = {}
+                        for aluno in salas[i]:
+                            t_nome = aluno["Turma de Origem"]
+                            if t_nome not in por_turma:
+                                por_turma[t_nome] = []
+                            por_turma[t_nome].append(aluno)
+                        
+                        # Pega 1 aluno de cada turma em rodízio (Round-Robin na sala)
+                        sala_intercalada = []
+                        while any(por_turma.values()):
+                            for t_nome in list(por_turma.keys()):
+                                if por_turma[t_nome]:
+                                    sala_intercalada.append(por_turma[t_nome].pop(0))
+                        
+                        salas[i] = sala_intercalada
+
+                    st.success(f"Distribuição concluída! Total de {total_alunos} alunos misturados com proporção equilibrada em {num_salas} salas.")
                     
                     # Exibição visual das salas
                     cols = st.columns(min(num_salas, 3))
